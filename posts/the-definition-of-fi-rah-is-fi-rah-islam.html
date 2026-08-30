@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#145a32">
+<title>The Definition of Fiṭrah. Is Fiṭrah Islam? — ASAL</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<div id="readProgress"></div>
+<button id="backToTop" aria-label="Back to top">↑</button>
+<div id="outer-wrapper">
+  <div id="header-wrapper">
+    <div id="header-inner">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjdHWh2ODuFtzgC1xyw35UnS2SgR89KOA9tKYlntwhKttJ04aqqgc9q_OW9q9gma_vaa8gLdbZc2vWf4ubKUxygsJLRA2WtIrq_BDjS3scGuJNYgp2njyVdF7lgXod305L47cIExCOuSNsLHy59WLd4jcy9fOueCVhWpJObMYrZTu4pZ-OCwUda33W5GCM/s1600/4395.png" alt="ASAL Logo">
+      <div class="titlewrapper"><h1>ASAL</h1></div>
+      <div class="descriptionwrapper"><p>Authentic • Spiritual • Artistic • Legacy</p></div>
+    </div>
+  </div>
+  <div id="search-top-wrapper">
+    <input type="text" id="searchInput" placeholder="Search articles..." style="width:100%;max-width:420px;margin:0 auto;display:block;padding:10px 16px;border-radius:30px;border:1px solid #d5f5e3;font-family:'Tajawal',sans-serif">
+  </div>
+  <div id="header-navigation">
+    <nav id="header-nav">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about/index.html">About</a></li>
+        <li><a href="../contact/index.html">Contact</a></li>
+        <li><a href="../documents/index.html">Documents</a></li>
+        <li><a href="../media/index.html">Media</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div id="content-wrapper">
+    <div id="main-wrapper">
+      <article class="post-outer">
+        <h3 class="post-title">The Definition of Fiṭrah. Is Fiṭrah Islam?</h3>
+        <div style="text-align:center;color:#1e8449;font-size:14px;margin-bottom:10px">2025-10-02 <span style="background:#eafaf1;border:1px solid #d5f5e3;padding:2px 10px;border-radius:20px;font-size:11px;margin:2px;display:inline-block">Essay</span></div>
+        <div class="post-body">
+          <div><br></div><div>Fiṭrah ≠ fully-formed Islamic creed.</div><div>Fiṭrah = an innate disposition toward tawḥīd, recognition of a Creator, and basic moral truths.</div><div><br></div><div>The Holy Prophet ﷺ said:</div><div><br></div><div>“Every child is born upon the fiṭrah, but it is his parents who make him a Jew, Christian, or Magian.” (Ṣaḥīḥ Muslim)</div><div><br></div><div>Imam Ghazali (rh) said:  “Fitrah inclines toward affirmation, but without proof it may also incline toward falsehood. Thus proofs are necessary to separate truth from falsehood.”</div><div><br></div><div>The fiṭrah gives them the innate pull toward tawḥīd.</div><div><br></div><div>The revelation tells them how to worship properly, who Allah truly is, and what false beliefs to reject.</div><div><br></div><div>Without revelation, fiṭrah could lead someone to vague deism, sun worship, or pantheism. That’s why the Qur’an criticizes the mushrikīn for their wrong acts man,</div><div><br></div><div>And regarding this fitrah argument this comes in my mind:</div><div>If Muslims are only upon fiṭrah, then what’s the need for Qur’an, Sunnah, and Prophets? Are Hindus and Christians also valid if they claim their fiṭrah led them to their beliefs?</div><div><br></div><div>And fitrah is the starting point as Imam Ghazali said and if one is misguided by his parents and becomes a Christian or a Jew then its because he was misguided to that belief and his fitrah is not Islam if we look at this from the lens of the classical scholars and only Ibn Taymiyyah was one of those who said Fitah is Islam as i mentioned above fitrah is only a starting point that one is created to believe in something and thus revelation helps us to understand.</div><div><br></div><div>And this Thing about Jinn do they exist or not is also related to this because one might say i believe in them because of fitrah or you might say you have seen one but atheists and many people who don't know much don't believe them in them:</div><div><br></div><div>Supernatural experiences are common, sure but they don’t tell you what you saw.</div><div>A Hindu says it’s Krishna,</div><div>A Catholic says Mary,</div><div>A new ager says aliens.</div><div>So the experience alone is too ambiguous; you need a framework (which is revelation) to distinguish truth from illusion.</div><div>That’s why fiṭrah needs guidance.</div>
+        </div>
+        <div id="postNav" class="post-nav"></div>
+      </article>
+    </div>
+    <div id="sidebar-wrapper">
+      <div class="widget">
+        <h2>About</h2>
+        <div style="padding:12px;font-size:15px;line-height:1.7">ASAL is a green legacy theme for thoughtful writing. This site was generated from Google Takeout.</div>
+      </div>
+      <div class="widget">
+        <h2>Recent Posts</h2>
+        <div id="recentPosts" style="padding:8px"></div>
+      </div>
+    </div>
+  </div>
+  <div id="footer-wrapper">
+    <p>© <span id="year"></span> ASAL — Built with Blogger Takeout Converter</p>
+  </div>
+</div>
+<script src="../assets/js/main.js"></script>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+(async function(){
+  try{
+    const r = await fetch('../posts.json');
+    if(!r.ok) return;
+    const posts = await r.json();
+    const el = document.getElementById('recentPosts');
+    if(el){
+      el.innerHTML = posts.slice(0,6).map(p=>'<div style="padding:8px 0;border-bottom:1px solid #eafaf1"><a href="'+(p.slug||'').split('/').pop()+'.html">'+p.title+'</a><div style="font-size:12px;color:#6b8a74">'+p.date+'</div></div>').join('');
+    }
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
