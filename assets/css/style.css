@@ -31,23 +31,9 @@ h3.post-title{font-family:'Amiri',serif;font-size:23px;text-align:center;margin-
 #backToTop{position:fixed;right:16px;bottom:18px;width:46px;height:46px;background:#145a32;color:#fff;border:none;border-radius:50%;display:none;align-items:center;justify-content:center;font-size:22px;cursor:pointer;z-index:90}
 #backToTop.show{display:flex}
 @media screen and (max-width:640px){#content-wrapper{flex-direction:column} #main-wrapper,#sidebar-wrapper{width:100%} #header-nav ul{flex-direction:column}}
-/* center the Read more button */
-.read-more {
-  display: block;
-  margin: 12px auto 0;
-  text-align: center;
-}
 
-/* make the date + labels block stack and center badges under the date */
-.post-outer > div[style*="text-align:center"] {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-}
+/* center the Read more button */ .read-more { display: block; margin: 12px auto 0; text-align: center; }
 
-/* tweak the label badges' spacing so they look good when centered */
-.post-outer > div[style*="text-align:center"] span {
-  display: inline-block;
-  margin: 0 4px;
-}
+/* stack date and the label badges and center them */ .post-outer > div[style="text-align:center"] { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+
+/* make label badges look/space nicely when centered*/ .post-outer > div[style="text-align:center"] span { display: inline-block; margin: 0 4px; }
