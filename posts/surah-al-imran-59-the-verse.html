@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#145a32">
+<title>Surah Al-Imran: 59, the verse — ASAL</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<div id="readProgress"></div>
+<button id="backToTop" aria-label="Back to top">↑</button>
+<div id="outer-wrapper">
+  <div id="header-wrapper">
+    <div id="header-inner">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjdHWh2ODuFtzgC1xyw35UnS2SgR89KOA9tKYlntwhKttJ04aqqgc9q_OW9q9gma_vaa8gLdbZc2vWf4ubKUxygsJLRA2WtIrq_BDjS3scGuJNYgp2njyVdF7lgXod305L47cIExCOuSNsLHy59WLd4jcy9fOueCVhWpJObMYrZTu4pZ-OCwUda33W5GCM/s1600/4395.png" alt="ASAL Logo">
+      <div class="titlewrapper"><h1>ASAL</h1></div>
+      <div class="descriptionwrapper"><p>Authentic • Spiritual • Artistic • Legacy</p></div>
+    </div>
+  </div>
+  <div id="search-top-wrapper">
+    <input type="text" id="searchInput" placeholder="Search articles..." style="width:100%;max-width:420px;margin:0 auto;display:block;padding:10px 16px;border-radius:30px;border:1px solid #d5f5e3;font-family:'Tajawal',sans-serif">
+  </div>
+  <div id="header-navigation">
+    <nav id="header-nav">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about/index.html">About</a></li>
+        <li><a href="../contact/index.html">Contact</a></li>
+        <li><a href="../documents/index.html">Documents</a></li>
+        <li><a href="../media/index.html">Media</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div id="content-wrapper">
+    <div id="main-wrapper">
+      <article class="post-outer">
+        <h3 class="post-title">Surah Al-Imran: 59, the verse</h3>
+        <div style="text-align:center;color:#1e8449;font-size:14px;margin-bottom:10px">2024-11-19 <span style="background:#eafaf1;border:1px solid #d5f5e3;padding:2px 10px;border-radius:20px;font-size:11px;margin:2px;display:inline-block">Essay</span></div>
+        <div class="post-body">
+          The Prophet - peace be upon him - was commanded to challenge them through a miraculous way, which is: the mutual invocation of curses.
+
+And the meaning of "mubahala": invoking a curse upon the wrongdoer from both parties. When this verse was revealed, the Messenger - peace be upon him - invited the delegation of Najran to mubahala. The Messenger of God - peace be upon him - came out carrying Al-Hussein, holding the hand of Al-Hasan, with Fatimah walking behind him, and Ali behind her, and he said to them: When I pray, say "Amen."
+The bishop of Najran said: O Christians: I see so birght and lighted faces that, if they asked God to move a mountain from its place, He would do so. So do not invoke curses and be destroyed, leaving no Christian on the face of the earth until the Day of Judgment. Then they accepted the tribute and left. The Messenger of God - peace be upon him - said: "By the One in whose hand is my soul, the punishment had descended upon the people of Najran, and if they had invoked curses, they would have been transformed into apes and pigs, and the valley would have been set ablaze against them, and God would have eradicated Najran and its people, even the birds on the trees, and the year would not have passed over the Christians until they perished".
+
+(Tafsir Tabari)<div><br></div><div>In Sahih al-Bukhari, Hudhayfah said: The Aqib and Sayyid, the leaders of Najran, came to the Messenger of Allah, peace be upon him, wanting to invoke a curse upon each other. One of them said to his companion: "Do not do it, for by Allah, if he is a prophet and we invoke a curse, we will not succeed, neither us nor our descendants after us." The Prophet, peace be upon him, went out with Hasan, Husayn, and Fatimah as Allah commanded: "Then say, 'Come, let us call our sons and your sons, our women and your women, ourselves and yourselves.'" [Al Imran: 61] But they were unable to challenge him.</div><div><br></div><div>The Christians were actually afraid to do that and by just seeing their faces they decided to run away.</div>
+        </div>
+        <div id="postNav" class="post-nav"></div>
+      </article>
+    </div>
+    <div id="sidebar-wrapper">
+      <div class="widget">
+        <h2>About</h2>
+        <div style="padding:12px;font-size:15px;line-height:1.7">ASAL is a green legacy theme for thoughtful writing. This site was generated from Google Takeout.</div>
+      </div>
+      <div class="widget">
+        <h2>Recent Posts</h2>
+        <div id="recentPosts" style="padding:8px"></div>
+      </div>
+    </div>
+  </div>
+  <div id="footer-wrapper">
+    <p>© <span id="year"></span> ASAL — Built with Blogger Takeout Converter</p>
+  </div>
+</div>
+<script src="../assets/js/main.js"></script>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+(async function(){
+  try{
+    const r = await fetch('../posts.json');
+    if(!r.ok) return;
+    const posts = await r.json();
+    const el = document.getElementById('recentPosts');
+    if(el){
+      el.innerHTML = posts.slice(0,6).map(p=>'<div style="padding:8px 0;border-bottom:1px solid #eafaf1"><a href="'+(p.slug||'').split('/').pop()+'.html">'+p.title+'</a><div style="font-size:12px;color:#6b8a74">'+p.date+'</div></div>').join('');
+    }
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
