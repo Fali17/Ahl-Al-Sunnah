@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#145a32">
+<title>A thing you won't be asked about in grave - story! — ASAL</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<div id="readProgress"></div>
+<button id="backToTop" aria-label="Back to top">↑</button>
+<div id="outer-wrapper">
+  <div id="header-wrapper">
+    <div id="header-inner">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjdHWh2ODuFtzgC1xyw35UnS2SgR89KOA9tKYlntwhKttJ04aqqgc9q_OW9q9gma_vaa8gLdbZc2vWf4ubKUxygsJLRA2WtIrq_BDjS3scGuJNYgp2njyVdF7lgXod305L47cIExCOuSNsLHy59WLd4jcy9fOueCVhWpJObMYrZTu4pZ-OCwUda33W5GCM/s1600/4395.png" alt="ASAL Logo">
+      <div class="titlewrapper"><h1>ASAL</h1></div>
+      <div class="descriptionwrapper"><p>Authentic • Spiritual • Artistic • Legacy</p></div>
+    </div>
+  </div>
+  <div id="search-top-wrapper">
+    <input type="text" id="searchInput" placeholder="Search articles..." style="width:100%;max-width:420px;margin:0 auto;display:block;padding:10px 16px;border-radius:30px;border:1px solid #d5f5e3;font-family:'Tajawal',sans-serif">
+  </div>
+  <div id="header-navigation">
+    <nav id="header-nav">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about/index.html">About</a></li>
+        <li><a href="../contact/index.html">Contact</a></li>
+        <li><a href="../documents/index.html">Documents</a></li>
+        <li><a href="../media/index.html">Media</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div id="content-wrapper">
+    <div id="main-wrapper">
+      <article class="post-outer">
+        <h3 class="post-title">A thing you won't be asked about in grave - story!</h3>
+        <div style="text-align:center;color:#1e8449;font-size:14px;margin-bottom:10px">2024-10-11 <span style="background:#eafaf1;border:1px solid #d5f5e3;padding:2px 10px;border-radius:20px;font-size:11px;margin:2px;display:inline-block">Essay</span></div>
+        <div class="post-body">
+          <div>Here's a mini story that you should ponder over.</div><div><br></div>Muwaffaq al-Din Abu Muhammad ibn Qudamah al-Maqdisi said: Al-Suhrawardi said: I had decided to read something of the science of theology, and I was hesitant whether to read Al-Irshad by Imam al-Haramayn, or Nihayat al-Iqdam by al-Shahrastani, or the book of his Sheikh. So I went with my uncle Abu al-Najib, and he was praying next to Sheikh Abdul Qadir. He said: Sheikh Abdul Qadir turned to me and said: O Omar, this is not from the provisions of the grave, this is not from the provisions of the grave. So I went back from that, and he was informed that the Sheikh had revealed to him what was in his heart. And he forbade him from the speech that Al-Qushayri and the like were attributed to him.&nbsp;<div><br></div><div>&nbsp;<b>(The Book of Straightforwardness by Ibn Tayimiyyah pg 87</b>)</div><div><br></div><div><br></div><div><br></div>
+        </div>
+        <div id="postNav" class="post-nav"></div>
+      </article>
+    </div>
+    <div id="sidebar-wrapper">
+      <div class="widget">
+        <h2>About</h2>
+        <div style="padding:12px;font-size:15px;line-height:1.7">ASAL is a green legacy theme for thoughtful writing. This site was generated from Google Takeout.</div>
+      </div>
+      <div class="widget">
+        <h2>Recent Posts</h2>
+        <div id="recentPosts" style="padding:8px"></div>
+      </div>
+    </div>
+  </div>
+  <div id="footer-wrapper">
+    <p>© <span id="year"></span> ASAL — Built with Blogger Takeout Converter</p>
+  </div>
+</div>
+<script src="../assets/js/main.js"></script>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+(async function(){
+  try{
+    const r = await fetch('../posts.json');
+    if(!r.ok) return;
+    const posts = await r.json();
+    const el = document.getElementById('recentPosts');
+    if(el){
+      el.innerHTML = posts.slice(0,6).map(p=>'<div style="padding:8px 0;border-bottom:1px solid #eafaf1"><a href="'+(p.slug||'').split('/').pop()+'.html">'+p.title+'</a><div style="font-size:12px;color:#6b8a74">'+p.date+'</div></div>').join('');
+    }
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
