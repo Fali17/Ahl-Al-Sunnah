@@ -1,396 +1,396 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ahlu-Sunnah Al Islam</title>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <meta name="theme-color" content="#145a32" />
-  <style>
-    :root {
-      --g900: #0d2818;
-      --g700: #145a32;
-      --g600: #1a6e3b;
-      --g500: #1e8449;
-      --g100: #d5f5e3;
-      --g25: #f6fcf7;
-      --gold: #c8a951;
-      --text: #1b2e1f;
-      --container-max: 1150px;
-      --gap: 22px;
-      --radius: 14px;
-      --nav-height: 56px;
-    }
-
-    /* reset */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { -webkit-text-size-adjust: 100%; }
-    body {
-      background: var(--g25);
-      color: var(--text);
-      font-family: 'Tajawal', sans-serif;
-      font-size: clamp(15px, 1.2vw, 18px);
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    a { color: var(--g700); font-weight: 600; text-decoration: none; }
-    img { max-width: 100%; height: auto; border-radius: 10px; display: block; }
-
-    /* Outer container */
-    #outer-wrapper {
-      background: #fff;
-      width: 95%;
-      max-width: var(--container-max);
-      margin: 20px auto;
-      border-radius: 18px;
-      border: 1px solid var(--g100);
-      overflow: hidden;
-      box-shadow: 0 6px 30px rgba(0,0,0,0.04);
-    }
-
-    /* Reading progress */
-    #readProgress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #145a32, #c8a951);
-      width: 0%;
-      z-index: 9999;
-      transition: width 0.08s linear;
-    }
-
-    /* Header */
-    #header-wrapper {
-      background: linear-gradient(180deg, var(--g700), var(--g600));
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      align-items: center;
-      border-bottom: 4px solid var(--gold);
-    }
-    .titlewrapper {
-      font-family: 'Amiri', serif;
-      font-size: clamp(20px, 3.6vw, 36px);
-      font-weight: 700;
-      color: #fff;
-      line-height: 1.05;
-    }
-    .descriptionwrapper {
-      color: #d5f5e3;
-      font-size: clamp(13px, 1.5vw, 16px);
-    }
-
-    /* Search (sticky) */
-    #search-top-wrapper {
-      background: rgba(255,255,255,0.98);
-      position: sticky;
-      top: 0;
-      z-index: 60;
-      padding: 10px;
-      border-bottom: 1px solid var(--g100);
-      backdrop-filter: blur(6px);
-    }
-    #search-form {
-      display: flex;
-      gap: 8px;
-      max-width: var(--container-max);
-      margin: 0 auto;
-    }
-    #search-form input[type="text"] {
-      flex: 1;
-      padding: 12px 14px;
-      border: 1px solid var(--g100);
-      border-radius: 30px;
-      background: #f9fefb;
-      font-size: 14px;
-    }
-    #search-form button {
-      background: var(--g700);
-      color: #fff;
-      border: none;
-      padding: 0 18px;
-      border-radius: 999px;
-      font-weight: 700;
-      cursor: pointer;
-      min-width: 72px;
-    }
-
-    /* Navigation (sticky, horizontally scrollable on small screens) */
-    #header-navigation {
-      background: #fff;
-      border-bottom: 1px solid var(--g100);
-      position: sticky;
-      top: calc( var(--search-height, 56px) );
-      z-index: 59;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    }
-    #header-nav {
-      max-width: var(--container-max);
-      margin: 0 auto;
-      overflow-x: auto;
-    }
-    #header-nav ul {
-      list-style: none;
-      display: flex;
-      gap: 8px;
-      padding: 10px;
-      align-items: center;
-      white-space: nowrap; /* keep items on one line */
-    }
-    #header-nav li { font-family: 'Amiri', serif; font-weight: 700; }
-    #header-nav a {
-      color: var(--g900);
-      padding: 10px 14px;
-      border-radius: 30px;
-      display: inline-block;
-    }
-    #header-nav a:hover { background: var(--g700); color: #fff; }
-
-    /* Layout: grid for main content so sidebar can collapse */
-    #content-wrapper {
-      padding: 22px;
-      display: grid;
-      grid-template-columns: 1fr 320px;
-      gap: var(--gap);
-      align-items: start;
-    }
-
-    @media (max-width: 980px) {
-      #content-wrapper { grid-template-columns: 1fr 300px; }
-    }
-    @media (max-width: 720px) {
-      #content-wrapper { grid-template-columns: 1fr; padding: 16px; }
-    }
-
-    /* Main and Sidebar */
-    #main-wrapper { width: 100%; }
-    #sidebar-wrapper { width: 100%; }
-
-    /* Posts */
-    .post-outer {
-      background: #ffffff;
-      border: 3px solid rgba(20,90,50,0.08);
-      border-radius: var(--radius);
-      margin-bottom: 18px;
-      padding: 18px;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-      box-shadow: 0 6px 20px rgba(20,90,50,0.06);
-      position: relative; /* enables absolutely positioned ::before inside */
-      overflow: visible;
-    }
-    .post-outer:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 14px 40px rgba(20,90,50,0.12);
-    }
-    .post-outer::before {
-      content: "";
-      position: absolute;
-      top: -1px;
-      left: 12px;
-      right: 12px;
-      height: 6px;
-      border-radius: 8px;
-      background: linear-gradient(90deg, #0d2818 0%, #145a32 40%, #c8a951 50%, #145a32 60%, #0d2818 100%);
-      pointer-events: none;
-    }
-
-    h3.post-title {
-      font-family: 'Amiri', serif;
-      font-size: clamp(18px, 2.4vw, 24px);
-      text-align: center;
-      margin-bottom: 10px;
-      color: var(--g700);
-    }
-
-    .post-body {
-      margin: 8px auto 0;
-      color: #145a32;
-      line-height: 1.9;
-    }
-
-    .read-more {
-      display: inline-block;
-      margin-top: 12px;
-      background: var(--g700);
-      color: #fff;
-      padding: 8px 18px;
-      border-radius: 20px;
-      font-size: 14px;
-      text-decoration: none;
-    }
-    .read-more:hover { background: #0d2818; }
-
-    /* Pagination */
-    .blog-pager {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin: 28px 0;
-      flex-wrap: wrap;
-    }
-    .blog-pager a {
-      background: #145a32;
-      color: #fff;
-      padding: 10px 18px;
-      border-radius: 30px;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 120px;
-      box-shadow: 0 4px 14px rgba(20, 90, 50, 0.22);
-      transition: all 0.18s ease;
-      text-align: center;
-    }
-    .blog-pager a:hover { transform: translateY(-1px); }
-
-    /* Sidebar widgets */
-    .widget {
-      margin-bottom: 18px;
-    }
-    .widget h2 {
-      background: linear-gradient(90deg, var(--g700), var(--g500));
-      font-family: 'Amiri', serif;
-      color: #fff;
-      padding: 12px;
-      border-radius: 10px;
-      text-align: center;
-      margin-bottom: 10px;
-    }
-    .widget p { padding: 8px; color: #145a32; }
-
-    /* Footer */
-    #footer-wrapper {
-      background: var(--g700);
-      color: #cfe9d6;
-      padding: 20px;
-      text-align: center;
-    }
-
-    /* Back to Top */
-    #backToTop {
-      position: fixed;
-      right: 16px;
-      bottom: 18px;
-      width: 46px;
-      height: 46px;
-      background: #145a32;
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      cursor: pointer;
-      z-index: 90;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
-    }
-    #backToTop.show { display: flex; }
-    #backToTop:focus { outline: 3px solid rgba(200,169,81,0.35); }
-
-    /* small improvements for tap targets */
-    button, input[type="submit"], a { touch-action: manipulation; }
-
-  </style>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>&lt;data:blog.pageTitle&gt;&lt;/&gt;</title>
+	<meta name="generator" content="LibreOffice 24.8.1.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="00:00:00"/>
+	<meta name="" content=""/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="#145a32"/>
+	<meta name="google-site-verification" content="rEHdwJZFQkg7yobuK4HcX2gd8MVU3cGmMtzWjuLvYmA"/>
+	<meta name="msapplication-navbutton-color" content="#145a32"/>
+	<meta name="theme-color" content="#145a32"/>
+	<meta name="twitter:card" content="summary_large_image"/>
+	<meta name="twitter:description" content=""/>
+	<meta name="twitter:image" content=""/>
+	<meta name="twitter:title" content=""/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="" content="">
+	<meta name="" content="">
+	<meta name="" content="">
+	<meta name="" content="website">
+	<meta name="" content="Ahlu-Sunnah Al Islam">
+	<meta name="" content="">
+	<meta name="" content="">
+	<style type="text/css">
+		h2.cjk { font-family: "NSimSun" }
+		h2.ctl { font-family: "Lucida Sans" }
+		h4.cjk { font-family: "NSimSun" }
+		h4.ctl { font-family: "Lucida Sans" }
+	</style>
 </head>
-<body>
-  <div aria-label="Reading progress" id="readProgress" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+<body lang="en-US" dir="ltr"><p>:root{--g900:#0d2818;--g700:#145a32;--g600:#1a6e3b;--g500:#1e8449;--g100:#d5f5e3;--g50:#eafaf1;--g25:#f6fcf7;--gold:#c8a951;--text:#1b2e1f}*{box-sizing:border-box;margin:0;padding:0}body{background:var(--g25);color:var(--text);font-family:'Tajawal',sans-serif;font-size:17px;line-height:1.8}a{color:var(--g700);font-weight:600;text-decoration:none}img{max-width:100%;height:auto;border-radius:10px}#outer-wrapper{background:#fff;width:95%;max-width:1150px;margin:24px
+auto;border-radius:18px;border:1px solid
+var(--g100);overflow:hidden}#header-wrapper{background:linear-gradient(180deg,var(--g700),var(--g600));color:#fff;text-align:center;padding:28px
+20px;min-height:170px;display:flex;justify-content:center;align-items:center;border-bottom:4px
+solid var(--gold)}#header-inner img{margin:0 auto
+10px!important;background:transparent!important;border:none!important;max-width:185px}.titlewrapper
+h1{font-family:'Amiri',serif;font-size:36px!important;color:#fff!important}.descriptionwrapper
+p{color:#d5f5e3!important}#search-top-wrapper{background:#fff;padding:12px
+18px;border-bottom:1px solid
+var(--g100);position:sticky;top:0;z-index:50}#search-top-wrapper
+.widget{margin:0}#search-top-wrapper .widget
+h2{display:none}#search-top-wrapper
+table{width:100%}#search-top-wrapper
+input[type=text]{width:100%;padding:12px 16px!important;border:1px
+solid var(--g100)!important;border-radius:30px 0 0
+30px!important;background:#f9fefb!important}#search-top-wrapper
+input[type=submit]{background:var(--g700)!important;color:#fff!important;border:none!important;padding:12px
+22px!important;border-radius:0 30px 30px
+0!important;font-weight:700;cursor:pointer}#header-navigation{background:#fff;border-bottom:1px
+solid var(--g100);position:relative}#header-nav
+h2{display:none}#header-nav
+ul{list-style:none;display:flex;justify-content:center;flex-wrap:wrap;gap:6px;padding:10px!important;max-width:1100px;margin:0
+auto}#header-nav
+li{font-family:'Amiri',serif;font-weight:700}#header-nav li
+a{color:var(--g900)!important;padding:12px
+20px;border-radius:30px;display:block}#header-nav li:hover
+a{background:var(--g700);color:#fff!important}#content-wrapper{padding:22px;display:flex;gap:22px}#main-wrapper{width:68%}
+#sidebar-wrapper{width:32%}.widget
+h2{background:linear-gradient(90deg,var(--g700),var(--g500));font-family:'Amiri',serif;color:#fff;padding:12px;border-radius:10px;text-align:center;margin:0
+0 12px 0}/* CLEARER LINES BETWEEN POSTS
+*/.blog-posts{display:flex;flex-direction:column;gap:0}.post-outer::before{
+ content:&quot;&quot;;  position:absolute;  top:0; left:0; right:0; 
+height:5px;  background:linear-gradient(90deg,#0d2818 0%, #145a32
+40%, #c8a951 50%, #145a32 60%, #0d2818
+100%);}h3.post-title{font-family:'Amiri',serif;font-size:23px;text-align:center;margin-bottom:8px}h3.post-title
+a{color:var(--g700)}.post-body{max-width:760px;margin:12px auto
+0;line-height:1.9}.home-snippet{  display:-webkit-box; 
+-webkit-line-clamp:4;  -webkit-box-orient:vertical;  overflow:hidden;
+ text-overflow:ellipsis; 
+min-height:108px;}.read-more{display:inline-block;margin-top:10px;background:var(--g700);color:#fff!important;padding:6px
+18px;border-radius:20px;font-size:14px}.read-more:hover{background:var(--g700)}.blog-pager{display:flex;justify-content:center;gap:12px;margin:24px
+0;flex-wrap:wrap}.blog-pager
+a{background:var(--g700);color:#fff!important;padding:10px
+22px;border-radius:30px;font-weight:700;display:inline-block}.blog-pager
+a:hover{background:var(--g700)}#blog-pager-newer-link{order:1}
+#blog-pager-older-link{order:2}/* SINGLE POST PREV / NEXT
+*/.post-nav{  display:flex;  justify-content:center;  gap:16px; 
+margin:28px 0 10px 0;  border-top:1px solid #fff;  padding-top:18px; 
+flex-wrap:wrap;}.post-nav a{  flex:0 1 260px;  background:#145a32
+!important;  border:1px solid #fff;  border-radius:12px; 
+padding:12px 16px;  text-align:center;  color:#fff !important; 
+text-decoration:none;  transition:all .2s;}.post-nav
+a:hover{background:var(--g100);transform:translateY(-2px)}.post-nav
+span{  font-size:13px;  color:#ffffff;  display:block; 
+white-space:nowrap;  overflow:hidden;  text-overflow:ellipsis; 
+margin-top:4px;}.prev-btn{text-align:left}.next-btn{text-align:right}#footer-wrapper{background:var(--g700);color:#cfe9d6;padding:20px;text-align:center}/*
+MOBILE MENU
+*/#mobileMenuToggle{display:none}#openMenu,#closeMenu{display:none}@media
+screen and (max-width:640px){ 
+#mobileMenuToggle{display:block;position:absolute;top:10px;right:14px;width:44px;height:44px;line-height:44px;text-align:center;background:#fff;border-radius:50%;border:1px
+solid var(--g100);z-index:999}  #openMenu{display:block}
+#closeMenu{display:none}  #openMenu a,#closeMenu
+a{font-size:26px;color:var(--g700);text-decoration:none;font-weight:800}
+ #header-nav{height:62px;overflow:hidden;transition:height .3s ease} 
+#header-nav.menu-open{height:auto}  #header-nav
+ul{flex-direction:column}  #header-nav
+li{width:100%;text-align:center} 
+#content-wrapper{flex-direction:column}
+#main-wrapper,#sidebar-wrapper{width:100%}}@media screen and
+(min-width:641px){ #header-nav{height:auto} }#ReportAbuse1,#Stats1{ 
+text-align:center !important;  display:block; 
+width:100%;}#ReportAbuse1,#Stats1 .widget-content{  text-align:center
+!important;}#ReportAbuse1,#Stats1 a{ 
+display:inline-block;}.post-outer{background:#ffffff;border:5px solid
+var(--g700);border-radius:14px;margin:0 0 18px 0;padding:18px
+20px}.post-outer h3.post-title a,.post-outer a{color:#145a32
+!important;}.post-outer .post-body{color:#145a32;}.post-outer
+.read-more{  background:#145a32 !important;  color:#ffffff
+!important;}.post-nav a{  background:#145a32 !important; 
+color:#ffffff !important;  border-color:#145a32 !important;}.post-nav
+a span{  color:#ffffff !important;}.read-more{  background:#145a32
+!important;  color:#ffffff !important;}.blog-pager a{ 
+background:#145a32 !important;  color:#ffffff !important;}/* =====
+100% MODERN HD SCORE - NO COLOR CHANGE, SAME AS SCREENSHOT ===== *//*
+Accessibility - skip link */.skip-link{  position:absolute;
+left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; 
+background:#145a32; color:#fff; padding:10px 16px; z-index:10000;
+border-radius:0 0 8px 0;  font-weight:700;}.skip-link:focus{left:0;
+top:0; width:auto; height:auto}/* Focus visible for keyboard
+*/a:focus-visible, button:focus-visible, input:focus-visible{ 
+outline:3px solid #c8a951; outline-offset:2px;}/* Reading progress -
+HD modern */#readProgress{  position:fixed; top:0; left:0;
+height:3px;  background:linear-gradient(90deg,#145a32,#c8a951); 
+width:0%; z-index:9999; transition:width .08s linear;}/* Sticky
+header like modern sites */#search-top-wrapper{ 
+backdrop-filter:blur(8px); 
+background:rgba(255,255,255,0.98)!important;}#header-navigation{ 
+position:sticky; top:48px; z-index:49;  box-shadow:0 2px 12px
+rgba(0,0,0,0.06);}/* HD post cards - same white+5px green border like
+screenshot, just better shadow */.post-outer{  transition:transform
+.2s ease, box-shadow .2s ease;  box-shadow:0 4px 18px
+rgba(20,90,50,0.08);  will-change:transform;}.post-outer:hover{ 
+transform:translateY(-2px);  box-shadow:0 10px 28px
+rgba(20,90,50,0.14);}/* Single arrow fix - NO pseudo arrows, keep
+color exactly like screenshot #145a32 */.blog-pager{display:flex;
+justify-content:center; gap:12px; margin:28px 0;
+flex-wrap:wrap}.blog-pager a{  background:#145a32!important; 
+color:#fff!important;  padding:12px 28px!important; 
+border-radius:30px!important;  font-weight:700!important; 
+display:inline-flex!important;  align-items:center;
+justify-content:center;  min-width:140px;  box-shadow:0 4px 14px
+rgba(20,90,50,0.22);  transition:all .18s ease;}.blog-pager
+a:hover{background:#0d2818!important; transform:translateY(-1px);
+box-shadow:0 6px 18px rgba(0,0,0,0.22)}#blog-pager-older-link
+a:after, #blog-pager-newer-link a:before,#blog-pager-older-link
+a::after, #blog-pager-newer-link a::before{content:none!important;
+display:none!important}/* Sidebar sticky - modern */@media screen and
+(min-width:981px){  #content-wrapper{align-items:flex-start} 
+#sidebar-wrapper{position:sticky; top:108px; align-self:flex-start;
+max-height:calc(100vh - 120px); overflow-y:auto}}/* Back to top -
+same green */#backToTop{  position:fixed; right:16px; bottom:18px;
+width:46px; height:46px;  background:#145a32; color:#fff;
+border:none; border-radius:50%;  display:none; align-items:center;
+justify-content:center;  font-size:22px; cursor:pointer; z-index:90; 
+box-shadow:0 6px 18px
+rgba(0,0,0,0.22);}#backToTop.show{display:flex}#backToTop:hover{background:#0d2818}/*
+Tablet - better like you asked */@media screen and (min-width:641px)
+and (max-width:980px){  #outer-wrapper{width:96%; margin:14px auto} 
+#content-wrapper{gap:16px; padding:16px}  #main-wrapper{width:62%}
+#sidebar-wrapper{width:38%}}/* Performance: content-visibility for
+posts below fold */.post-outer{content-visibility:auto;
+contain-intrinsic-size:0 300px}/* HD images */.post-body
+img{image-rendering:-webkit-optimize-contrast; max-width:100%;
+height:auto}.post-body img[loading=&quot;lazy&quot;]{background:#eafaf1}/*
+===== COMMENTS ADJUSTED - CENTRAL, MODERN, SAME GREEN LIKE SCREENSHOT
+===== */.comments-wrapper{  max-width:760px; margin:32px auto 0;
+text-align:center;  border-top:2px solid #d5f5e3; padding-top:24px;
+display:block;}#comments{max-width:760px; margin:0 auto;
+text-align:center}#comments h4{  font-family:'Amiri',serif;
+color:#145a32; font-size:18px; font-weight:700;  text-align:center;
+margin:0 0 16px; padding-bottom:10px;  border-bottom:1px solid
+#eafaf1;}#comments-block{ text-align:left;
+}.comment-author{font-weight:700; color:#0d2818}.comment-body
+p{color:#1a3323; line-height:1.6; background:#f6fcf7; padding:10px
+14px; border-radius:10px; border:1px solid
+#d5f5e3}.comment-footer{font-size:12px; color:#6b9a7d;
+margin-bottom:18px}/* Post a Comment button - make it green pill like
+your Read more */.comment-form a, #comments a.comment-link,
+.comment-reply a{  background:#145a32!important;
+color:#fff!important;  padding:10px 22px!important;
+border-radius:30px!important;  font-weight:700!important;
+display:inline-flex!important;  text-decoration:none!important;
+margin-top:8px;  box-shadow:0 3px 10px
+rgba(20,90,50,0.18);}.comment-form
+a:hover{background:#0d2818!important}/* No comments text central
+*/.comments .comment-form p, #comments p{ text-align:center }/*
+Iframe comment form - central */.comments iframe, #comments iframe{
+margin:0 auto; display:block; max-width:100%; }/* Space between Next
+button and comments
+*/.post-nav{margin-bottom:28px!important}#comments{margin-top:10px!important}/*
+===== REMOVE GREEN PILL BUTTONS IN COMMENTS ===== */#comments
+.comment-reply,#comments .thread-toggle,.comments
+.thread-toggle,.comment-thread
+.thread-toggle,.comment-reply,.thread-chrome
+.thread-toggle,a.comment-reply,a.thread-toggle,.comments
+a:empty,#comments a:empty,.comments-wrapper a:empty,#comments
+.comment-actions a:empty,.comment-form .comment-reply,.comment-thread
+.comment-replies .comment-reply {  display:none!important; 
+width:0!important; height:0!important; padding:0!important;
+margin:0!important;}/* Keep only Post a Comment text, hide its green
+background pill */#comments .comment-form a,#comments
+a.comment-link,.comment-reply a {  background:none!important;
+color:#145a32!important;  box-shadow:none!important;
+padding:0!important;  font-weight:700!important;
+display:inline!important;}/* Hide the extra small green ovals you saw
+*/#comments div &gt; a[class*=&quot;pill&quot;],#comments div &gt;
+a[style*=&quot;background&quot;],.comments-wrapper div &gt;
+a[style*=&quot;background:&quot;] {  display:none!important;}/*
+Ensure Enter comment field stays */#comments iframe, .comments
+iframe{ display:block!important; }/* Print */@media print{ 
+#search-top-wrapper, #header-navigation, #sidebar-wrapper,
+#backToTop, #readProgress{display:none!important}} <a href="#main-wrapper">Skip
+to content</a> 
+</p>
+<div id="readProgress" dir="ltr"><p><br/>
+<br/>
 
-  <div id="outer-wrapper">
-    <!-- Header -->
-    <header id="header-wrapper" role="banner">
-      <div>
-        <h1 class="titlewrapper">Ahlu-Sunnah Al Islam</h1>
-        <p class="descriptionwrapper">Authentic Islamic Knowledge</p>
-      </div>
-    </header>
+	</p>
+</div>
+<div id="outer-wrapper" dir="ltr"><p>https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjdHWh2ODuFtzgC1xyw35UnS2SgR89KOA9tKYlntwhKttJ04aqqgc9q_OW9q9gma_vaa8gLdbZc2vWf4ubKUxygsJLRA2WtIrq_BDjS3scGuJNYgp2njyVdF7lgXod305L47cIExCOuSNsLHy59WLd4jcy9fOueCVhWpJObMYrZTu4pZ-OCwUda33W5GCM/s1600/4395.png
+	192 791 true true BEFORE_DESCRIPTION 192 
+	</p>
+	<div id="header-inner" dir="ltr"><p><br/>
+<br/>
 
-    <!-- Search -->
-    <div id="search-top-wrapper">
-      <form id="search-form" role="search" aria-label="Search this blog" onsubmit="event.preventDefault(); alert('Search is a demo.');">
-        <input type="text" placeholder="Search this blog..." aria-label="Search query" />
-        <button type="submit" aria-label="Search">Search</button>
-      </form>
-    </div>
+		</p>
+	</div>
+	<p>&lt;script type=&quot;text/javascript&quot;&gt;(function(){  var
+	path = location.pathname.replace(/\/$/, ''); 
+	if(!/\/\d{4}\/\d{2}\//.test(path)) return;  function ready(fn){   
+	if(document.readyState !== 'loading') fn();    else
+	document.addEventListener('DOMContentLoaded', fn);  } 
+	ready(function(){    var box = document.createElement('div');   
+	box.id = 'asiPostNav';    box.className = 'asi-post-nav';    var
+	anchor =      document.querySelector('.post-body') ||     
+	document.querySelector('.post-outer') ||     
+	document.querySelector('.centered-bottom') ||     
+	document.querySelector('#main') ||      document.body;    if(anchor
+	=== document.body){      document.body.appendChild(box);    } else
+	if(anchor.parentNode){      anchor.parentNode.insertBefore(box,
+	anchor.nextSibling);    } else {     
+	document.body.appendChild(box);    }    function pathOf(url){     
+	try {        var a = document.createElement('a');        a.href =
+	url;        return (a.pathname || '').replace(/\/$/, '');      }
+	catch(e){ return ''; }    }    function hrefOf(entry){     
+	if(!entry || !entry.link) return '';      for(var
+	i=0;i&lt;entry.link.length;i++){        if(entry.link[i].rel ===
+	'alternate') return entry.link[i].href;      }      return '';    } 
+	  function titleOf(entry){      if(!entry || !entry.title) return
+	'Post';      return (typeof entry.title === 'object') ?
+	(entry.title.$t || 'Post') : String(entry.title);    }    function
+	btn(cls, label, entry){      var a = document.createElement('a');   
+	  a.className = 'asi-nav-btn ' + cls;      a.href = hrefOf(entry);  
+	   a.innerHTML = '&lt;span
+	class=&quot;asi-nav-label&quot;&gt;'+label+'&lt;/span&gt;&lt;span
+	class=&quot;asi-nav-title&quot;&gt;'+titleOf(entry)+'&lt;/span&gt;';
+	     return a;    }    &lt;/script&gt; 
+	</p>
+	<div id="search-top-wrapper" dir="ltr">
+		<form action="/app/public/task/6a94302b7cdba15a196181d2/03fa52c7-47dc-4735-bb8c-364dbe3ab4c4.xml">
+			<table cellpadding="2" cellspacing="2">
+				<tr>
+					<td style="border: none; padding: 0in"><p><input type="text" name="q"  size="20" style="width: 1.73in; height: 0.26in"></input></p>
+					</td>
+					<td style="border: none; padding: 0in"><p><input type="submit" value="Search"  style="width: 0.77in; height: 0.41in"></input></p>
+					</td>
+				</tr>
+			</table>
+		</form>
+		<p><br/>
+<br/>
 
-    <!-- Navigation -->
-    <div id="header-navigation" role="navigation" aria-label="Primary navigation">
-      <nav id="site-navigation">
-        <div id="header-nav">
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#media">Media</a></li>
-            <li><a href="#documents">Documents</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-      </nav>
-    </div>
+		</p>
+	</div>
+	<div id="header-navigation" dir="ltr"><p><br/>
+<br/>
 
-    <!-- Content -->
-    <main id="content-wrapper" role="main">
-      <div id="main-wrapper">
-        <article class="post-outer" aria-labelledby="post1-title">
-          <h3 class="post-title" id="post1-title">Welcome to Our Blog</h3>
-          <div class="post-body">
-            <p>Spreading the truth. Authentic Islamic knowledge based on Quran and Sunnah.</p>
-          </div>
-          <a class="read-more" href="#read-more">Read more ...</a>
-        </article>
+		</p>
+		<div id="mobileMenuToggle" dir="ltr"><p><a name="openMenu"></a><a name="closeMenu"></a>
+			<a href="javascript:void(0)" onclick="openMenu()">☰</a><a href="javascript:void(0)" onclick="closeMenu()">✖</a></p>
+		</div>
+		<p>{&quot;7797560130646563382&quot;:{&quot;href&quot;:&quot;https://alsunnahalislam.blogspot.com/p/contact.html&quot;,&quot;position&quot;:2,&quot;title&quot;:&quot;Contact&quot;},&quot;1149325969174695939&quot;:{&quot;href&quot;:&quot;https://alsunnahalislam.blogspot.com/p/welcome-to-blog.html&quot;,&quot;position&quot;:1,&quot;title&quot;:&quot;About&quot;},&quot;5629507925828768404&quot;:{&quot;href&quot;:&quot;https://alsunnahalislam.blogspot.com/p/terms-conditions.html&quot;,&quot;position&quot;:6,&quot;title&quot;:&quot;Terms&quot;},&quot;link0&quot;:{&quot;href&quot;:&quot;https://alsunnahalislam.blogspot.com/&quot;,&quot;position&quot;:0,&quot;title&quot;:&quot;Home&quot;},&quot;5155802490253290258&quot;:{&quot;href&quot;:&quot;https://alsunnahalislam.blogspot.com/p/privacy-policy.html&quot;,&quot;position&quot;:5,&quot;title&quot;:&quot;Privacy&quot;},&quot;9030475754646529861&quot;:{&quot;href&quot;:&quot;https://alsunnahalislam.blogspot.com/p/media.html&quot;,&quot;position&quot;:4,&quot;title&quot;:&quot;Media&quot;},&quot;3011742524924921587&quot;:{&quot;href&quot;:&quot;https://alsunnahalislam.blogspot.com/p/documents.html&quot;,&quot;position&quot;:3,&quot;title&quot;:&quot;Documents&quot;}}
+		Home 
+		</p>
+		<ul>
+			<li><p></p></li>
+		</ul>
+	</div>
+	<div id="content-wrapper" dir="ltr"><p><br/>
+<br/>
 
-        <!-- Example pager (keeps layout stable) -->
-        <div class="blog-pager" aria-hidden="false">
-          <a href="#prev">← Newer</a>
-          <a href="#next">Older →</a>
-        </div>
-      </div>
+		</p>
+		<div id="main-wrapper" dir="ltr"><p style="margin-bottom: 0in">true
+			comment #ffffff false By true #ffffff true #ffffff TextAndImage
+			#ffffff on true 1x1 true false true 1 false #ffffff false false 
+			</p>
+			<div id="blog-pager" dir="ltr"><p style="margin-bottom: 0in"><a name="blog-pager-newer-link"></a><a name="blog-pager-older-link"></a>
+				← Previous Page Next Page → 
+				</p>
+			</div>
+			<p><a name="comment-form"></a><a name="comment-post-message"></a><a name="comment-editor-src"></a>
+			<img name="Object1" align="bottom" width="100%" height="47"/>
+ 
+			</p>
+			<p style="margin-bottom: 0in"><a name="comment-post-message Copy 1"></a><a name="comment-editor-src Copy 1"></a>
+			<img name="Object2" align="bottom" width="100%" height="47"/>
+ 
+			</p>
+			<p style="margin-bottom: 0in"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAMAAABFNRROAAADAFBMVEWKior///+0tLTx8fGSkpLk5OPq6ur9/f3k5OTq6unt7e3n6Of9/f79/v3+/v7u5+UAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///+JBae4AAAAPklEQVQImWNgZGRkgAAQC4qhLDTAiACYUgw8TMxMbCysDGC9DHwoPHYMHicLB5THi4UHV8nOzMXGDZNDWAYAVe4BRhvf2Y0AAAAASUVORK5CYII=" name="Image1" align="bottom" width="13" height="13" border="0"/>
 
-      <aside id="sidebar-wrapper" role="complementary" aria-label="Sidebar">
-        <div class="widget">
-          <h2>Featured</h2>
-          <p>Latest Islamic articles and resources.</p>
-        </div>
-      </aside>
-    </main>
+			: 
+			</p>
+			<div id="comments" dir="ltr"><h4 class="western"><a name="comments"></a><a name="comments-block"></a>
+				:</h4>
+			</div>
+			<p align="center" style="margin-bottom: 0in">Read more ...</p>
+			<div id="postNav" dir="ltr"><p style="margin-bottom: 0in"><br/>
 
-    <!-- Footer -->
-    <footer id="footer-wrapper" role="contentinfo">
-      <p>&copy; 2024 Ahlu Sunnah Al Islam. All rights reserved.</p>
-    </footer>
-  </div>
+				</p>
+			</div>
+			<p style="margin-left: 0.33in; margin-right: 0.33in; margin-bottom: 0in">
+			Clear out style (needs to be a non-empty string) 
+			</p>
+		</div>
+		<form name="wikipedia" action="/app/public/task/6a94302b7cdba15a196181d2/03fa52c7-47dc-4735-bb8c-364dbe3ab4c4.xml">
+			<p><a href="https://wikipedia.org/wiki/" target="_blank">
+  <font color="#000080">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAAcCAYAAAD4IkbVAAABzElEQVRYhcWXa5HCMBSFv3WAhEiohEhAQiQgIQ6QAA6QgITFweKg64D90dwhveTV556ZDFBOc8/9mmbaL8AAjkEP4Je3DkAXvj/Df134fDBWF/wA1+D3mXnF+wxeyaDnjetf5cRXw7iF0eKVAn3DnK0ZbEzmCHwrQx+Om8hnArFU4dGEEZ2T8no1p6gD7on6SekOf3JG4KK8p4L3oIKWFDfWVbyjzl6817OWob0xx5vUoeAjzPNigFGVnRBCr2FXCeArtV00l2kJC+10LfXGJMDqVEXHhhCiWmOtASwzqOoic+gKQTchgDQ9iaooLjSVrg/H51Ct7gA5zaXbM96CTKWONHufGxSW0ZUxhapdEhba6bpE0N2o5kKU6OrGbgUvrEwVhjtbP5C4jNcpX21vXZWqyNNOVy8Dn/FZVqYqaqVr+Qybo7sJVZHnk64OkdsRvPJZ6ktqkVJ04xBxAP2Ao+lKU6XltFi+ECK+rKXG4mdmt2VYQ/oS2+i3DV5PurELO1AVSbE4ROpmSdGNz3V7hDV80pWh35d8xrcLVZGmmwuQorsbVZGZEODMP1IVxXRLAQzjsH7rYClN2YKksZb3sM10pv5kBQPdOwvX6h9bTmx+JuKZUwAAAABJRU5ErkJggg==" name="Image2" align="top" width="43" height="28" border="1"/>
+  </font>
+</a>
+<a href="https://wikipedia.org/wiki/" target="_blank">
+			</a><input type="text"  size="20" style="width: 1.73in; height: 0.26in"></input>
+			<input type="submit" value="submit"  style="width: 0.77in; height: 0.41in"></input>
+						</p>
+		</form>
+		<p><br/>
+true true 4969190302710375192 true false 
+		</p>
+		<p>5 true true LAST_WEEK 
+		</p>
+		<h2 class="western">Popular</h2>
+		<p><br/>
+<br/>
 
-  <button id="backToTop" title="Back to top" aria-label="Back to top">↑</button>
+		</p>
+		<p>HIERARCHY yyyy true MMMM MMM dd MM/dd false true MONTHLY 
+		</p>
+		<div id="ArchiveList" dir="ltr"><p><br/>
+<br/>
 
-  <script>
-    // Reading progress & Back-to-top
-    (function () {
-      const readProgress = document.getElementById('readProgress');
-      const backToTop = document.getElementById('backToTop');
-      function update() {
-        const doc = document.documentElement;
-        const scrollTop = doc.scrollTop || document.body.scrollTop;
-        const scrollHeight = doc.scrollHeight || document.body.scrollHeight;
-        const clientHeight = doc.clientHeight || window.innerHeight;
-        const percent = (scrollTop / (scrollHeight - clientHeight)) * 100;
-        readProgress.style.width = Math.min(Math.max(percent, 0), 100) + '%';
-        if (scrollTop > 400) backToTop.classList.add('show'); else backToTop.classList.remove('show');
-      }
-      window.addEventListener('scroll', update, { passive: true });
-      window.addEventListener('resize', update);
-      update();
+			</p>
+		</div>
+		<ul>
+			<li><p>() 
+			</p></li>
+		</ul>
+		<ul>
+			<li><p>() 
+			</p></li>
+		</ul>
+		<p>() 
+		</p>
+		<ul>
+			<li><p></p></li>
+		</ul>
+		<p><a href="javascript:void(0)">▼&nbsp; ◄&nbsp; ►&nbsp; </a>ALPHA
+		LIST ALL true 
+		</p>
+		<ul>
+			<li><p>() 
+			</p></li>
+		</ul>
+		<p style="margin-bottom: 0in">() 
+		</p>
+		<p>true true #000000 #000000 #000000 #000000 #FFFFFF #000000
+		#000000 
+		</p>
+		<p style="margin-bottom: 0in">Atom 
+		</p>
+		<p>VERTICAL 
+		</p>
+		<div id="google_translate_element" dir="ltr"><p><br/>
+<br/>
 
-      backToTop.addEventListener('click', function () {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    })();
-  </script>
+			</p>
+		</div>
+		<p><strong>Ahlu Sunnah Al Islam</strong>. All rights reserved.</p>
+	</div>
+	<p>↑ 
+	</p>
+</div>
 </body>
 </html>
