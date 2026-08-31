@@ -19,17 +19,23 @@
       <div class="descriptionwrapper"><p>Spreading The Truth</p></div>
     </div>
   </div>
-  <div id="search-top-wrapper">
-    <input type="text" id="searchInput" placeholder="Search articles..." style="width:100%;max-width:420px;margin:0 auto;display:block;padding:10px 16px;border-radius:30px;border:1px solid #d5f5e3;font-family:'Tajawal',sans-serif">
+<div id="search-top-wrapper">
+    <div class="search-row">
+      <input type="text" id="searchBox" placeholder="Search articles..." aria-label="Search articles" autocomplete="off">
+      <button id="clearSearch" aria-label="Clear search" title="Clear">✕</button>
+    </div>
   </div>
   <div id="header-navigation">
+    <button id="navToggle" aria-controls="header-nav" aria-expanded="false" aria-label="Toggle navigation">☰</button>
     <nav id="header-nav">
       <ul>
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="../about/index.html">About</a></li>
-        <li><a href="../contact/index.html">Contact</a></li>
-        <li><a href="../documents/index.html">Documents</a></li>
-        <li><a href="../media/index.html">Media</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about/index.html">About</a></li>
+        <li><a href="contact/index.html">Contact</a></li>
+        <li><a href="documents/index.html">Documents</a></li>
+        <li><a href="media/index.html">Media</a></li>
+        <li><a href="terms/index.html">Terms &amp; Conditions</a></li>
+        <li><a href="privacy/index.html">Privacy Policy</a></li>
       </ul>
     </nav>
   </div>
@@ -71,5 +77,24 @@ document.getElementById('year').textContent = new Date().getFullYear();
   }catch(e){}
 })();
 </script>
+  <script>
+// Initialize Blog UI (main.js exposes Blog)
+document.getElementById('year').textContent = new Date().getFullYear();
+if(window.Blog && typeof window.Blog.init === 'function'){
+  Blog.init({
+    postsPath: './posts.json',
+    postsPerPage: 10,
+    searchInputId: 'searchBox',
+    clearSearchId: 'clearSearch',
+    postsListId: 'postsList',
+    labelCloudId: 'labelCloud',
+    paginationId: 'paginationControls',
+    navToggleId: 'navToggle',
+    navId: 'header-nav'
+  });
+} else {
+  console.warn('Blog module not available yet.');
+}
+  </script>
 </body>
 </html>
