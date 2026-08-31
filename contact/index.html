@@ -297,5 +297,24 @@ document.getElementById('year').textContent = new Date().getFullYear();
   }catch(e){}
 })();
 </script>
+  <script>
+// Initialize Blog UI (main.js exposes Blog)
+document.getElementById('year').textContent = new Date().getFullYear();
+if(window.Blog && typeof window.Blog.init === 'function'){
+  Blog.init({
+    postsPath: './posts.json',
+    postsPerPage: 10,
+    searchInputId: 'searchBox',
+    clearSearchId: 'clearSearch',
+    postsListId: 'postsList',
+    labelCloudId: 'labelCloud',
+    paginationId: 'paginationControls',
+    navToggleId: 'navToggle',
+    navId: 'header-nav'
+  });
+} else {
+  console.warn('Blog module not available yet.');
+}
+  </script>
 </body>
 </html>
