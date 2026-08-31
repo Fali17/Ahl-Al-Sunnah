@@ -1,19 +1,27 @@
+@media (prefers-reduced-motion: reduce){ *{scroll-behavior:auto!important} }
 :root{--g900:#0d2818;--g700:#145a32;--g600:#1a6e3b;--g500:#1e8449;--g100:#d5f5e3;--g50:#eafaf1;--g25:#f6fcf7;--gold:#c8a951;--text:#1b2e1f}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--g25);color:var(--text);font-family:'Tajawal',sans-serif;font-size:17px;line-height:1.8}
 a{color:var(--g700);font-weight:600;text-decoration:none}
 img{max-width:100%;height:auto;border-radius:10px}
 #outer-wrapper{background:#fff;width:95%;max-width:1150px;margin:24px auto;border-radius:18px;border:1px solid var(--g100);overflow:hidden}
-#header-wrapper{background:linear-gradient(180deg,var(--g700),var(--g600));color:#fff;text-align:center;padding:28px 20px;min-height:170px;display:flex;justify-content:center;align-items:center;border-bottom:4px solid var(--gold)}
+#header-wrapper{background:linear-gradient(180deg,var(--g700),var(--g600));color:#fff;text-align:center;padding:28px 20px;min-height:170px;display:flex;justify-content:center;align-items:center;border-bottom:6px solid rgba(0,0,0,0.03)}
 #header-inner img{margin:0 auto 10px!important;background:transparent!important;border:none!important;max-width:185px}
 .titlewrapper h1{font-family:'Amiri',serif;font-size:36px!important;color:#fff!important}
 .descriptionwrapper p{color:#d5f5e3!important}
 #search-top-wrapper{background:#fff;padding:12px 18px;border-bottom:1px solid var(--g100);position:sticky;top:0;z-index:50}
+.search-row{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:8px}
+.search-row input{flex:1;padding:10px 14px;border-radius:28px;border:1px solid var(--g100);font-size:15px}
+.search-row button{background:transparent;border:none;font-size:18px;color:var(--g700);cursor:pointer}
 #header-navigation{background:#fff;border-bottom:1px solid var(--g100);position:relative}
-#header-nav ul{list-style:none;display:flex;justify-content:center;flex-wrap:wrap;gap:6px;padding:10px!important;max-width:1100px;margin:0 auto}
+#navToggle{display:none;border:none;background:transparent;padding:12px;font-size:22px;cursor:pointer;color:var(--g900)}
+#header-nav{max-width:1100px;margin:0 auto}
+#header-nav ul{list-style:none;display:flex;justify-content:center;flex-wrap:wrap;gap:6px;padding:10px!important}
 #header-nav li{font-family:'Amiri',serif;font-weight:700}
 #header-nav li a{color:var(--g900)!important;padding:12px 20px;border-radius:30px;display:block}
 #header-nav li:hover a{background:var(--g700);color:#fff!important}
+#header-nav.open{display:block}
+@media (max-width:860px){ #navToggle{display:block} #header-nav{display:none} #header-nav.open{display:block;padding:10px} #header-nav ul{flex-direction:column;align-items:center} }
 #content-wrapper{padding:22px;display:flex;gap:22px}
 #main-wrapper{width:68%} #sidebar-wrapper{width:32%}
 .widget h2{background:linear-gradient(90deg,var(--g700),var(--g500));font-family:'Amiri',serif;color:#fff;padding:12px;border-radius:10px;text-align:center;margin:0 0 12px 0}
@@ -28,18 +36,22 @@ h3.post-title{font-family:'Amiri',serif;font-size:23px;text-align:center;margin-
 .post-nav a{flex:0 1 260px;background:#145a32!important;border:1px solid #fff;border-radius:12px;padding:12px 16px;text-align:center;color:#fff!important}
 #footer-wrapper{background:var(--g700);color:#cfe9d6;padding:20px;text-align:center}
 #readProgress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#145a32,#c8a951);width:0%;z-index:9999}
-#backToTop{position:fixed;right:16px;bottom:18px;width:46px;height:46px;background:#145a32;color:#fff;border:none;border-radius:50%;display:none;align-items:center;justify-content:center;font-size:22px;cursor:pointer;z-index:90}
+#backToTop{position:fixed;right:16px;bottom:18px;width:46px;height:46px;background:#145a32;color:#fff;border:none;border-radius:50%;display:none;align-items:center;justify-content:center;font-size:22px}
 #backToTop.show{display:flex}
-@media screen and (max-width:640px){#content-wrapper{flex-direction:column} #main-wrapper,#sidebar-wrapper{width:100%} #header-nav ul{flex-direction:column}}
+@media screen and (max-width:640px){#content-wrapper{flex-direction:column} #main-wrapper,#sidebar-wrapper{width:100%} }
 
-/* center the Read more button */ .read-more { display: block; margin: 12px auto 0; text-align: center; }
+/* Pagination controls */
+#paginationControls{display:flex;gap:12px;align-items:center;justify-content:center;margin:20px 0}
+.pager-btn{background:var(--g700);color:#fff;border:none;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:700}
+.pager-btn:disabled{background:#c8e6c9;color:#6b8b6b;cursor:not-allowed}
+.pager-info{color:var(--g900);font-weight:700}
 
-/* stack date and the label badges and center them */ .post-outer > div[style="text-align:center"] { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+/* Labels */
+.label-pill{background:#145a32;color:#fff;padding:6px 10px;border-radius:999px;font-size:13px;cursor:pointer;margin:4px;display:inline-block}
 
-/* make label badges look/space nicely when centered*/ .post-outer > div[style="text-align:center"] span { display: inline-block; margin: 0 4px; }
+/* Report link */
+.report-link{color:#fff;background:#c0392b;padding:8px 12px;border-radius:8px;display:inline-block;text-decoration:none;font-weight:700}
+.report-link:hover{opacity:0.95}
 
-/* force-center the sidebar label cloud */ #labelCloud { display: flex !important; justify-content: center !important; align-items: center !important; gap: 6px; width: 100%; margin: 0 auto; }
-
-/* stack the post date above badges and center them */ .post-outer > div[style="text-align:center"] { display: flex !important; flex-direction: column !important; align-items: center !important; gap: 6px; }
-
-/* ensure individual badges center and have even spacing */ #labelCloud span, .post-outer > div[style="text-align:center"] span { display: inline-block; margin: 4px; }
+/* small screens tweaks */
+@media (max-width:420px){ .search-row input{font-size:14px} .label-pill{font-size:12px;padding:5px 8px} }
