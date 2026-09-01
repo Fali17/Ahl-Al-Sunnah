@@ -181,3 +181,24 @@ window.Blog = (function(){
 
   return { init };
 })();
+
+/* ===== Nav toggle fallback for pages that don't initialize Blog.init ===== */
+document.addEventListener('DOMContentLoaded', function () {
+  var t = document.getElementById('navToggle');
+  var nav = document.getElementById('header-nav');
+  if (t && nav) {
+    // ensure the button toggles the nav open class
+    t.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = nav.classList.toggle('open');
+      t.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    // close nav on outside click (mobile)
+    document.addEventListener('click', function (ev) {
+      if (!nav.contains(ev.target) && !t.contains(ev.target)) {
+        nav.classList.remove('open');
+        t.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+});

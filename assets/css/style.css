@@ -5,7 +5,7 @@ body{background:var(--g25);color:var(--text);font-family:'Tajawal',sans-serif;fo
 a{color:var(--g700);font-weight:600;text-decoration:none}
 img{max-width:100%;height:auto;border-radius:10px}
 #outer-wrapper{background:#fff;width:95%;max-width:1150px;margin:24px auto;border-radius:18px;border:1px solid var(--g100);overflow:hidden}
-#header-wrapper{background:linear-gradient(180deg,var(--g700),var(--g600));color:#fff;text-align:center;padding:28px 20px;min-height:170px;display:flex;justify-content:center;align-items:center;border-bottom:6px solid rgba(0,0,0,0.03)}
+#header-wrapper{background:linear-gradient(180deg,var(--g700),var(--g600));color:#fff;text-align:center;padding:28px 20px;min-height:170px;display:flex;justify-content:center;align-items:center;bor[...]
 #header-inner img{margin:0 auto 10px!important;background:transparent!important;border:none!important;max-width:185px}
 .titlewrapper h1{font-family:'Amiri',serif;font-size:36px!important;color:#fff!important}
 .descriptionwrapper p{color:#d5f5e3!important}
@@ -29,20 +29,7 @@ img{max-width:100%;height:auto;border-radius:10px}
 .post-outer h3.post-title a{color:#145a32!important}
 h3.post-title{font-family:'Amiri',serif;font-size:23px;text-align:center;margin-bottom:8px}
 .post-body{max-width:760px;margin:12px auto 0;line-height:1.9}
-.read-more {
-  display: block;      /* Changed from inline-block */
-  width: max-content;  /* Prevents the block from stretching to 100% width */
-  margin-left: auto;   /* Centers the block horizontally */
-  margin-right: auto;  /* Centers the block horizontally */
-  
-  /* Your original styles */
-  margin-top: 10px;
-  background: var(--g700);
-  color: #fff!important;
-  padding: 6px 18px;
-  border-radius: 20px;
-  font-size: 14px;
-}
+/* existing read-more removed to be replaced by improved rules */
 
 .blog-pager{display:flex;justify-content:center;gap:12px;margin:24px 0;flex-wrap:wrap}
 .blog-pager a{background:var(--g700);color:#fff!important;padding:10px 22px;border-radius:30px;font-weight:700;display:inline-block}
@@ -50,7 +37,7 @@ h3.post-title{font-family:'Amiri',serif;font-size:23px;text-align:center;margin-
 .post-nav a{flex:0 1 260px;background:#145a32!important;border:1px solid #fff;border-radius:12px;padding:12px 16px;text-align:center;color:#fff!important}
 #footer-wrapper{background:var(--g700);color:#cfe9d6;padding:20px;text-align:center}
 #readProgress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#145a32,#c8a951);width:0%;z-index:9999}
-#backToTop{position:fixed;right:16px;bottom:18px;width:46px;height:46px;background:#145a32;color:#fff;border:none;border-radius:50%;display:none;align-items:center;justify-content:center;font-size:22px}
+#backToTop{position:fixed;right:16px;bottom:18px;width:46px;height:46px;background:#145a32;color:#fff;border:none;border-radius:50%;display:none;align-items:center;justify-content:center;font-size[...]
 #backToTop.show{display:flex}
 @media screen and (max-width:640px){#content-wrapper{flex-direction:column} #main-wrapper,#sidebar-wrapper{width:100%} }
 
@@ -69,3 +56,144 @@ h3.post-title{font-family:'Amiri',serif;font-size:23px;text-align:center;margin-
 
 /* small screens tweaks */
 @media (max-width:420px){ .search-row input{font-size:14px} .label-pill{font-size:12px;padding:5px 8px} }
+
+
+/* ===== Header / Search / Nav improvements (appended) ===== */
+
+/* Header main layout tweaks */
+#header-wrapper {
+  padding: 36px 20px;
+  min-height: 170px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Center the logo + title */
+#header-inner { text-align:center; max-width:1100px; width:100%; padding:0 12px; }
+
+/* Search row: pill input + button matched to screenshot */
+.search-row {
+  max-width: 980px;
+  margin: 8px auto;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 6px;
+}
+.search-row input[type="text"],
+#search-top-wrapper input[type="text"],
+#search-top-wrapper input {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 28px;
+  border: 1px solid var(--g100);
+  font-size: 15px;
+  background: #fff;
+  box-shadow: none;
+  transition: box-shadow .18s ease, border-color .18s ease;
+}
+.search-row input::placeholder { color: #9fbca8; }
+
+/* Search button: green rounded pill on the right */
+.search-row button,
+#search-top-wrapper .search-btn {
+  background: linear-gradient(90deg,var(--g700),var(--g500));
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 28px;
+  font-weight:700;
+  cursor:pointer;
+  flex: 0 0 auto;
+  box-shadow: 0 4px 12px rgba(20,90,50,0.12);
+}
+.search-row button:hover,
+#search-top-wrapper .search-btn:hover { transform: translateY(-1px); }
+
+/* If you have a separate clear button keep it neutral */
+.search-row button[aria-label="Clear search"] { background:transparent; color:var(--g700); padding:6px 10px; border-radius:8px; }
+
+/* Header nav: centered, professional looking */
+#header-navigation { background: #fff; border-bottom:1px solid var(--g100); }
+#header-nav { max-width:1100px; margin:0 auto; padding:12px 6px; display:block; }
+#header-nav ul { list-style:none; display:flex; justify-content:center; gap:12px; flex-wrap:wrap; padding:0; margin:0; }
+#header-nav li { margin: 0; }
+#header-nav a {
+  display:inline-block;
+  color:var(--g900);
+  padding:10px 16px;
+  border-radius:8px;
+  font-weight:700;
+  text-decoration:none;
+  transition: background .18s ease, color .18s ease, transform .12s ease;
+}
+#header-nav a:hover, #header-nav a:focus {
+  background: linear-gradient(90deg,var(--g700),var(--g500));
+  color:#fff !important;
+  transform: translateY(-2px);
+  outline: none;
+}
+
+/* Active link */
+#header-nav a.active {
+  background: linear-gradient(90deg,var(--g700),var(--g500));
+  color: #fff !important;
+  box-shadow: 0 6px 18px rgba(20,90,50,0.12);
+}
+
+/* Mobile: collapse nav behind toggle */
+#navToggle { display:none; background:transparent; border:none; font-size:22px; color:var(--g900); cursor:pointer; padding:10px; }
+@media (max-width:860px){
+  #navToggle{ display:block; }
+  #header-nav{ display:none; }
+  #header-nav.open { display:block; padding:10px 20px; background:#fff; border-top:1px solid var(--g100); }
+  #header-nav ul{ flex-direction:column; align-items:center; gap:6px; }
+}
+
+/* Make sure the centered layout adapts on small screens */
+@media (max-width:640px){
+  .search-row { padding:8px 10px; gap:8px; }
+  .search-row input { font-size:14px; padding:10px 12px; }
+  .search-row button { padding:9px 12px; }
+}
+
+/* ===== Post card: center the Read more button reliably ===== */
+/* center without changing text alignment of the post body */
+.post-outer { position: relative; }
+.read-more {
+  display: inline-block;
+  background: var(--g700);
+  color: #fff !important;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 14px;
+  margin-top: 12px;
+  text-decoration: none;
+  font-weight:700;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%); /* centers in the card */
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.read-more:hover { transform: translateX(-50%) translateY(-3px); box-shadow: 0 6px 18px rgba(20,90,50,0.15); }
+
+/* Optional: slightly narrower card content for better centering on very small screens */
+@media (max-width:420px){
+  .read-more { padding: 7px 14px; font-size:13px; }
+  .post-outer { padding:14px; }
+}
+
+/* ===== Misc responsive tweaks to keep layout consistent ===== */
+#content-wrapper { gap: 22px; padding: 22px; display:flex; align-items:flex-start; }
+#main-wrapper { width:68%; }
+#sidebar-wrapper { width:32%; }
+@media (max-width:920px){
+  #main-wrapper { width:100%; order:1; }
+  #sidebar-wrapper { width:100%; order:2; }
+  #content-wrapper { flex-direction: column; padding:16px; gap:16px; }
+}
+
+/* Accessibility: focus outlines for keyboard users */
+a:focus, button:focus, input:focus { outline: 3px solid rgba(20,90,50,0.12); outline-offset: 2px; }
