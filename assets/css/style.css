@@ -21,7 +21,7 @@ img{max-width:100%;height:auto;border-radius:10px}
 .post-outer h3.post-title a,.post-outer a{color:#145a32!important}
 h3.post-title{font-family:'Amiri',serif;font-size:23px;text-align:center;margin-bottom:8px}
 .post-body{max-width:760px;margin:12px auto 0;line-height:1.9}
-.read-more{display:inline-block;margin-top:10px;background:var(--g700);color:#fff!important;padding:6px 18px;border-radius:20px;font-size:14px}
+.read-more{display:flex;margin-top:10px;background:var(--g700);color:#fff!important;padding:6px 18px;border-radius:20px;font-size:14px}
 .blog-pager{display:flex;justify-content:center;gap:12px;margin:24px 0;flex-wrap:wrap}
 .blog-pager a{background:var(--g700);color:#fff!important;padding:10px 22px;border-radius:30px;font-weight:700;display:inline-block}
 .post-nav{display:flex;justify-content:center;gap:16px;margin:28px 0 10px 0;border-top:1px solid #fff;padding-top:18px;flex-wrap:wrap}
