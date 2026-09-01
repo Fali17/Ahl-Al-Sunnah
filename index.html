@@ -1,84 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#145a32">
-<title>Ahl-Al-Sunnah — Home</title>
+<title>ASAL — Home</title>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
 <div id="readProgress"></div>
-<button id="backToTop" aria-label="Back to top">↑</button>
+<button id="backToTop">↑</button>
 <div id="outer-wrapper">
   <div id="header-wrapper">
     <div id="header-inner">
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjdHWh2ODuFtzgC1xyw35UnS2SgR89KOA9tKYlntwhKttJ04aqqgc9q_OW9q9gma_vaa8gLdbZc2vWf4ubKUxygsJLRA2WtIrq_BDjS3scGuJNYgp2njyVdF7lgXod305L47cIExCOuSNsLHy59WLd4jcy9fOueCVhWpJObMYrZTu4pZ-OCwUda33W5GCM/s1600/4395.png" alt="ASAL logo">
-      <div class="titlewrapper"><h1>Ahl-Al-Sunnah</h1></div>
-      <div class="descriptionwrapper"><p>Spreading The Truth</p></div>
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjdHWh2ODuFtzgC1xyw35UnS2SgR89KOA9tKYlntwhKttJ04aqqgc9q_OW9q9gma_vaa8gLdbZc2vWf4ubKUxygsJLRA2WtIrq_BDjS3scGuJNYgp2njyVdF7lgXod305L47cIExCOuSNsLHy59WLd4jcy9fOueCVhWpJObMYrZTu4pZ-OCwUda33W5GCM/s1600/4395.png" alt="ASAL Logo">
+      <div class="titlewrapper"><h1>ASAL</h1></div>
+      <div class="descriptionwrapper"><p>Authentic • Spiritual • Artistic • Legacy</p></div>
     </div>
   </div>
   <div id="search-top-wrapper">
-    <div class="search-row">
-      <input type="text" id="searchBox" placeholder="Search articles..." aria-label="Search articles" autocomplete="off">
-      <button id="clearSearch" aria-label="Clear search" title="Clear">✕</button>
-    </div>
+    <input type="text" id="searchBox" placeholder="Search articles..." style="width:100%;max-width:420px;margin:0 auto;display:block;padding:10px 16px;border-radius:30px;border:1px solid #d5f5e3;font-family:'Tajawal',sans-serif">
   </div>
   <div id="header-navigation">
-    <button id="navToggle" aria-controls="header-nav" aria-expanded="false" aria-label="Toggle navigation">☰</button>
     <nav id="header-nav">
       <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about/index.html">About</a></li>
-        <li><a href="contact/index.html">Contact</a></li>
-        <li><a href="documents/index.html">Documents</a></li>
-        <li><a href="media/index.html">Media</a></li>
-        <li><a href="terms/index.html">Terms &amp; Conditions</a></li>
-        <li><a href="privacy/index.html">Privacy Policy</a></li>
+        <li><a href="./index.html">Home</a></li>
+        <li><a href="./about/index.html">About</a></li>
+        <li><a href="./contact/index.html">Contact</a></li>
+        <li><a href="./documents/index.html">Documents</a></li>
+        <li><a href="./media/index.html">Media</a></li>
       </ul>
     </nav>
   </div>
   <div id="content-wrapper">
     <div id="main-wrapper">
       <div id="postsList"></div>
-      <div id="paginationControls" class="blog-pager" aria-label="Pagination"></div>
+      <div class="blog-pager"><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Back to top ↑</a></div>
     </div>
     <div id="sidebar-wrapper">
-      
+      <div class="widget">
+        <h2>Welcome</h2>
+        <div style="padding:12px;font-size:15px;line-height:1.7">This site was generated from Blogger Takeout using the ASAL green theme. Browse posts, search, and enjoy the calm reading experience.</div>
+      </div>
       <div class="widget">
         <h2>Labels</h2>
         <div id="labelCloud" style="padding:12px;display:flex;flex-wrap:wrap;gap:6px"></div>
       </div>
-      <div class="widget">
-        <h2>Report</h2>
-        <div style="padding:12px;font-size:15px;line-height:1.7;text-align:center">
-          <a href="report-abuse.html" class="report-link">Report abuse or problematic content</a>
-        </div>
-      </div>
     </div>
   </div>
-  <div id="footer-wrapper"><p>© <span id="year"></span>Ahl-Al-Sunnah— <a href="report-abuse.html" class="report-link">Report abuse</a></p></div>
+  <div id="footer-wrapper"><p>© <span id="year"></span> ASAL — Blogger → GitHub Pages</p></div>
 </div>
-<script src="assets/js/main.js"></script>
+<script src="./assets/js/main.js"></script>
 <script>
-// Initialize Blog UI (main.js exposes Blog)
-document.getElementById('year').textContent = new Date().getFullYear();
-if(window.Blog && typeof window.Blog.init === 'function'){
-  Blog.init({
-    postsPath: './posts.json',
-    postsPerPage: 10,
-    searchInputId: 'searchBox',
-    clearSearchId: 'clearSearch',
-    postsListId: 'postsList',
-    labelCloudId: 'labelCloud',
-    paginationId: 'paginationControls',
-    navToggleId: 'navToggle',
-    navId: 'header-nav'
-  });
-} else {
-  console.warn('Blog module not available yet.');
+document.getElementById('year').textContent=new Date().getFullYear();
+let allPosts=[];
+async function loadPosts(){
+  const res = await fetch('./posts.json');
+  allPosts = await res.json();
+  renderPosts(allPosts);
+  renderLabels(allPosts);
 }
+function renderPosts(posts){
+  const c=document.getElementById('postsList');
+  if(!posts.length){c.innerHTML='<div class="post-outer"><p>No posts found.</p></div>';return;}
+  c.innerHTML=posts.map(p=>{
+    return '<div class="post-outer"><h3 class="post-title"><a href="posts/'+(p.slug||p.id)+'.html">'+p.title+'</a></h3><div style="text-align:center;color:#1e8449;font-size:13px;margin-bottom:8px">'+p.date+' '+(p.labels||[]).map(l=>'<span style="background:#eafaf1;border:1px solid #d5f5e3;padding:2px 8px;border-radius:20px;font-size:11px;margin:0 2px">'+l+'</span>').join('')+'</div><div class="post-body" style="font-size:16px">'+(p.snippet||'')+'</div><a class="read-more" href="posts/'+(p.slug||p.id)+'.html">Read more</a></div>';
+  }).join('');
+}
+function renderLabels(posts){
+  const map={};
+  posts.forEach(p=>(p.labels||[]).forEach(l=>map[l]=(map[l]||0)+1));
+  const el=document.getElementById('labelCloud');
+  el.innerHTML=Object.entries(map).sort((a,b)=>b[1]-a[1]).slice(0,20).map(([l,c])=>'<span style="background:#145a32;color:#fff;padding:4px 10px;border-radius:20px;font-size:12px;cursor:pointer" onclick="filterLabel(\''+l.replace(/'/g,"\\'")+'\')">'+l+' ('+c+')</span>').join('') || '<span style="font-size:13px;color:#888">No labels</span>';
+}
+function filterLabel(l){
+  const filtered=allPosts.filter(p=>(p.labels||[]).includes(l));
+  renderPosts(filtered);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.getElementById('searchBox')?.addEventListener('input', e=>{
+  const q=e.target.value.toLowerCase();
+  if(!q){renderPosts(allPosts);return;}
+  const f=allPosts.filter(p=>p.title.toLowerCase().includes(q)||p.snippet.toLowerCase().includes(q)|| (p.labels||[]).join(' ').toLowerCase().includes(q));
+  renderPosts(f);
+});
+loadPosts();
 </script>
 </body>
 </html>
