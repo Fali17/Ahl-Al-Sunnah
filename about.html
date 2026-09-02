@@ -30,6 +30,8 @@
         <li><a href="contact.html">Contact</a></li>
         <li><a href="documents.html">Documents</a></li>
         <li><a href="media-page.html">Media</a></li>
+        <li><a href="privacy-policy.html">Privacy</a></li>
+        <li><a href="terms-conditions.html">Terms</a></li>
       </ul>
     </nav>
   </div>
@@ -47,23 +49,10 @@
     <div id="sidebar-wrapper">
       </div>
   <div id="footer-wrapper">
-    <p>© <span id="year"></span> ASAL — Built with Blogger Takeout Converter</p>
+    <p>© <span id="year"></span> Ahl-Al-Sunnah</p>
   </div>
 </div>
 <script src="assets/js/main.js"></script>
-<script>
-document.getElementById('year').textContent = new Date().getFullYear();
-(async function(){
-  try{
-    const r = await fetch('posts.json');
-    if(!r.ok) return;
-    const posts = await r.json();
-    const el = document.getElementById('recentPosts');
-    if(el){
-      el.innerHTML = posts.slice(0,6).map(p=>'<div style="padding:8px 0;border-bottom:1px solid #eafaf1"><a href="'+(p.slug||'').split('/').pop()+'.html">'+p.title+'</a><div style="font-size:12px;color:#6b8a74">'+p.date+'</div></div>').join('');
-    }
-  }catch(e){}
-})();
-</script>
+
 </body>
 </html>
