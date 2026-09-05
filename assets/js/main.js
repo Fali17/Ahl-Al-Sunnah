@@ -18,7 +18,7 @@ function closeMenu(){
   var btt = document.getElementById('backToTop');
   if(btt){
     window.addEventListener('scroll', function(){
-      if(window.scrollY>320) btt.classList.add('show'); else btt.classList.remove('show');
+      if(window.scrollY>300) btt.classList.add('show'); else btt.classList.remove('show');
     });
     btt.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
   }
