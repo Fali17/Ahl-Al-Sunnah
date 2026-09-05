@@ -4,7 +4,7 @@ body{background:var(--g25);color:var(--text);font-family:'Tajawal',sans-serif;fo
 a{color:var(--g700);font-weight:600;text-decoration:none}
 img{max-width:100%;height:auto;border-radius:10px}
 #outer-wrapper{background:#fff;width:95%;max-width:1150px;margin:24px auto;border-radius:18px;border:1px solid var(--g100);overflow:hidden}
-#header-wrapper{background:linear-gradient(180deg,var(--g700),var(--g600));color:#fff;text-align:center;padding:28px 20px;min-height:170px;display:flex;justify-content:center;align-items:center;border-bottom:4px solid var(--gold)}
+#header-wrapper{background:linear-gradient(180deg,var(--g700),var(--g600));color:#fff;text-align:center;padding:28px 20px;min-height:170px;display:flex;justify-content:center;align-items:center;border-radius:18px 18px 0 0}
 #header-inner img{margin:0 auto 10px!important;background:transparent!important;border:none!important;max-width:185px}
 .titlewrapper h1{font-family:'Amiri',serif;font-size:36px!important;color:#fff!important}
 .descriptionwrapper p{color:#d5f5e3!important}
@@ -28,16 +28,11 @@ h3.post-title{font-family:'Amiri',serif;font-size:23px;text-align:center;margin-
 .post-nav a{flex:0 1 260px;background:#145a32!important;border:1px solid #fff;border-radius:12px;padding:12px 16px;text-align:center;color:#fff!important}
 #footer-wrapper{background:var(--g700);color:#cfe9d6;padding:20px;text-align:center}
 #readProgress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#145a32,#c8a951);width:0%;z-index:9999}
-#backToTop{position:fixed;right:16px;bottom:18px;width:46px;height:46px;  background: linear-gradient(90deg, var(--g700), var(--g500)); /* Gradient: dark green to lighter green */color:white;border:none;border-radius:50%;display:none;align-items:center;justify-content:center;font-size:22px;cursor:pointer;z-index:90}
-
+#backToTop{position:fixed;bottom:20px;right:20px;width:50px;height:50px;background:linear-gradient(90deg,var(--g700),var(--g500));color:#fff;border:none;border-radius:50%;display:none;align-items:center;justify-content:center;font-size:1.5rem;cursor:pointer;transition:all 0.3s ease;z-index:1000}
+#backToTop:hover{background:linear-gradient(90deg,var(--g900),var(--g700));transform:translateY(-3px);box-shadow:0 6px 16px rgba(20,90,50,0.25)}
 #backToTop.show{display:flex}
 @media screen and (max-width:640px){#content-wrapper{flex-direction:column} #main-wrapper,#sidebar-wrapper{width:100%} #header-nav ul{flex-direction:column}}
 
-#backToTop:hover {
-  background: linear-gradient(90deg, var(--g900), var(--g700));  /* Even darker gradient */
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(20, 90, 50, 0.25);
-}
 /* center the Read more button */
 .read-more {
   display: block;
