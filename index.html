@@ -14,7 +14,7 @@
 <div id="outer-wrapper">
   <div id="header-wrapper">
     <div id="header-inner">
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjdHWh2ODuFtzgC1xyw35UnS2SgR89KOA9tKYlntwhKttJ04aqqgc9q_OW9q9gma_vaa8gLdbZc2vWf4ubKUxygsJLRA2WtIrq_BDjS3scGuJNYgp2njyVdF7lgXod305L47cIExCOuSNsLHy59WLd4jcy9fOueCVhWpJObMYrZTu4pZ-OCwUda33W5GCM/s1600/4395.png" alt="ASAL Logo">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjdHWh2ODuFtzgC1xyw35UnS2SgR89KOA9tKYlntwhKttJ04aqqgc9q_OW9q9gma_vaa8gLdbZc2vWf4ubKUxygsJLRA2WtIrq_BDjS3scGuJNYgp2njyVdF7lgXod" alt="logo">
       <div class="titlewrapper"><h1>Ahl-Al-Sunnah</h1></div>
       <div class="descriptionwrapper"><p>Spreading The Truth</p></div>
     </div>
@@ -38,10 +38,17 @@
   <div id="content-wrapper">
     <div id="main-wrapper">
       <div id="postsList"></div>
+
+      <!-- Pagination controls (buttons centered only) -->
+      <div id="pagination" class="blog-pager" style="margin-top:18px;">
+        <button id="prevBtn" disabled>« Previous</button>
+        <span id="pageInfo" style="align-self:center;font-weight:700;color:#145a32;margin:0 12px"></span>
+        <button id="nextBtn" disabled>Next »</button>
+      </div>
+
       <div class="blog-pager"><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Back to top ↑</a></div>
     </div>
     <div id="sidebar-wrapper">
-     
 
       <div class="widget">
         <h2>Labels</h2>
@@ -63,38 +70,119 @@
 
 <script src="assets/js/main.js"></script>
 <script>
-document.getElementById('year').textContent=new Date().getFullYear();
-let allPosts=[];
+// Pagination: 10 posts per page. Only the pagination buttons are centered (CSS uses .blog-pager).
+
+document.getElementById('year').textContent = new Date().getFullYear();
+let allPosts = [];
+let filteredPosts = [];
+const postsPerPage = 10;
+let currentPage = 0;
+
 async function loadPosts(){
-  const res = await fetch('./posts.json');
-  allPosts = await res.json();
-  renderPosts(allPosts);
+  try{
+    const res = await fetch('./posts.json');
+    allPosts = await res.json();
+  }catch(e){
+    console.error('Failed to load posts.json', e);
+    allPosts = [];
+  }
+  filteredPosts = allPosts.slice();
+  renderPage();
   renderLabels(allPosts);
 }
-function renderPosts(posts){
-  const c=document.getElementById('postsList');
-  if(!posts.length){c.innerHTML='<div class="post-outer"><p>No posts found.</p></div>';return;}
-  c.innerHTML=posts.map(p=>{
-    return '<div class="post-outer"><h3 class="post-title"><a href="posts/'+(p.slug||p.id)+'.html">'+p.title+'</a></h3><div style="text-align:center;color:#1e8449;font-size:13px;margin-bottom:8px">'+p.date+' '+(p.labels||[]).map(l=>'<span style="background:#eafaf1;border:1px solid #d5f5e3;padding:2px 8px;border-radius:20px;font-size:11px;margin:0 2px">'+l+'</span>').join('')+'</div><div class="post-body" style="font-size:16px">'+(p.snippet||'')+'</div><a class="read-more" href="posts/'+(p.slug||p.id)+'.html">Read more</a></div>';
-  }).join('');
+
+function renderPage(){
+  const c = document.getElementById('postsList');
+  const totalPages = Math.max(1, Math.ceil(filteredPosts.length / postsPerPage));
+  if(currentPage > totalPages - 1) currentPage = totalPages - 1;
+  const start = currentPage * postsPerPage;
+  const pagePosts = filteredPosts.slice(start, start + postsPerPage);
+
+  if(!pagePosts.length){
+    c.innerHTML = '<div class="post-outer"><p>No posts found.</p></div>';
+  } else {
+    c.innerHTML = pagePosts.map(p => {
+      const slugOrId = p.slug || p.id || '';
+      const href = 'posts/' + slugOrId + '.html';
+      const when = p.date || '';
+      const snippet = p.snippet || '';
+      return '<div class="post-outer">' +
+             '<h3 class="post-title"><a href="' + href + '">' + escapeHtml(p.title || 'Untitled') + '</a></h3>' +
+             (when ? '<div style="text-align:center;color:#1e8449;font-size:13px;margin-bottom:8px">' + escapeHtml(when) + '</div>' : '') +
+             '<div class="post-body"><p>' + escapeHtml(snippet) + '</p></div>' +
+             '</div>';
+    }).join('');
+  }
+
+  updatePager(totalPages);
 }
-function renderLabels(posts){
-  const map={};
-  posts.forEach(p=>(p.labels||[]).forEach(l=>map[l]=(map[l]||0)+1));
-  const el=document.getElementById('labelCloud');
-  el.innerHTML=Object.entries(map).sort((a,b)=>b[1]-a[1]).slice(0,20).map(([l,c])=>'<span style="background:#145a32;color:#fff;padding:4px 10px;border-radius:20px;font-size:12px;cursor:pointer" onclick="filterLabel(\''+l.replace(/'/g,"\\'")+'\')">'+l+' ('+c+')</span>').join('') || '<span style="font-size:13px;color:#888">No labels</span>';
+
+function updatePager(totalPages){
+  const prev = document.getElementById('prevBtn');
+  const next = document.getElementById('nextBtn');
+  const info = document.getElementById('pageInfo');
+
+  prev.disabled = currentPage === 0;
+  next.disabled = currentPage >= totalPages - 1 || totalPages === 0;
+  info.textContent = filteredPosts.length ? 'Page ' + (currentPage + 1) + ' of ' + totalPages + ' (' + filteredPosts.length + ' posts)' : '';
 }
-function filterLabel(l){
-  const filtered=allPosts.filter(p=>(p.labels||[]).includes(l));
-  renderPosts(filtered);
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-document.getElementById('searchBox')?.addEventListener('input', e=>{
-  const q=e.target.value.toLowerCase();
-  if(!q){renderPosts(allPosts);return;}
-  const f=allPosts.filter(p=>p.title.toLowerCase().includes(q)||p.snippet.toLowerCase().includes(q)|| (p.labels||[]).join(' ').toLowerCase().includes(q));
-  renderPosts(f);
+
+document.getElementById('prevBtn').addEventListener('click', () => {
+  if(currentPage > 0){
+    currentPage--;
+    renderPage();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 });
+
+document.getElementById('nextBtn').addEventListener('click', () => {
+  const totalPages = Math.max(1, Math.ceil(filteredPosts.length / postsPerPage));
+  if(currentPage < totalPages - 1){
+    currentPage++;
+    renderPage();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+});
+
+function renderLabels(posts){
+  const map = {};
+  (posts || []).forEach(p => (p.labels || []).forEach(l => map[l] = (map[l] || 0) + 1));
+  const el = document.getElementById('labelCloud');
+  el.innerHTML = Object.entries(map).sort((a,b) => b[1]-a[1]).slice(0,20).map(([l,c]) => '<span style="background:#145a32;color:#fff;padding:4px 10px;border-radius:20px;font-size:12px;cursor:pointer" onclick="filterLabel(\'' + escapeHtmlAttr(l) + '\')">' + escapeHtml(l) + ' (' + c + ')</span>').join('');
+}
+
+function filterLabel(l){
+  filteredPosts = allPosts.filter(p => (p.labels || []).includes(l));
+  currentPage = 0;
+  renderPage();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Search integrates with pagination
+const searchBox = document.getElementById('searchBox');
+searchBox?.addEventListener('input', e => {
+  const q = (e.target.value || '').toLowerCase().trim();
+  if(!q){
+    filteredPosts = allPosts.slice();
+  } else {
+    filteredPosts = allPosts.filter(p => {
+      const title = (p.title || '').toLowerCase();
+      const snippet = (p.snippet || '').toLowerCase();
+      const labels = ((p.labels || []).join(' ') || '').toLowerCase();
+      return title.includes(q) || snippet.includes(q) || labels.includes(q);
+    });
+  }
+  currentPage = 0;
+  renderPage();
+});
+
+// helpers to avoid XSS
+function escapeHtml(s){
+  if(!s) return '';
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+function escapeHtmlAttr(s){ return escapeHtml(s).replace(/"/g, '&quot;'); }
+
 loadPosts();
 </script>
 </body>
