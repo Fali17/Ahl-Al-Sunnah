@@ -39,12 +39,63 @@
     <div id="main-wrapper">
       <div id="postsList"></div>
 
-      <!-- Pagination controls (buttons centered only) -->
-      <div id="pagination" class="blog-pager" style="margin-top:18px;">
-        <button id="prevBtn" disabled>« Previous</button>
-        <span id="pageInfo" style="align-self:center;font-weight:700;color:#145a32;margin:0 12px"></span>
-        <button id="nextBtn" disabled>Next »</button>
-      </div>
+     <!-- Pagination controls (Modern Inline Style) -->
+<div id="pagination" class="blog-pager" style="
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    margin-top: 24px; 
+    gap: 16px; 
+    font-family: system-ui, -apple-system, sans-serif;
+">
+  <!-- Previous Button -->
+  <button id="prevBtn" disabled 
+    style="
+      background-color: #f4f4f4;
+      color: #a0a0a0;
+      border: 2px solid #dcdcdc;
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: not-allowed;
+      transition: all 0.2s ease-in-out;
+      box-shadow: none;
+    "
+    onmouseover="if(!this.disabled) { this.style.backgroundColor='#145a32'; this.style.color='#ffffff'; this.style.transform='translateY(-1px)'; }"
+    onmouseout="if(!this.disabled) { this.style.backgroundColor='#ffffff'; this.style.color='#145a32'; this.style.transform='none'; }"
+    onmousedown="if(!this.disabled) { this.style.transform='translateY(1px)'; }"
+    onmouseup="if(!this.disabled) { this.style.transform='translateY(-1px)'; }"
+  >« Previous</button>
+
+  <!-- Page Info -->
+  <span id="pageInfo" style="
+      font-weight: 700; 
+      color: #145a32; 
+      font-size: 15px;
+  ">Page 1 of 6</span>
+
+  <!-- Next Button (Enabled by default as an example) -->
+  <button id="nextBtn" 
+    style="
+      background-color: #ffffff;
+      color: #145a32;
+      border: 2px solid #145a32;
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    "
+    onmouseover="if(!this.disabled) { this.style.backgroundColor='#145a32'; this.style.color='#ffffff'; this.style.transform='translateY(-1px)'; this.style.boxShadow='0 4px 8px rgba(20,90,50,0.15)'; }"
+    onmouseout="if(!this.disabled) { this.style.backgroundColor='#ffffff'; this.style.color='#145a32'; this.style.transform='none'; this.style.boxShadow='0 2px 4px rgba(0,0,0,0.05)'; }"
+    onmousedown="if(!this.disabled) { this.style.transform='translateY(1px)'; }"
+    onmouseup="if(!this.disabled) { this.style.transform='translateY(-1px)'; }"
+  >Next »</button>
+</div>
+
 
       <div class="blog-pager"><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Back to top ↑</a></div>
     </div>
